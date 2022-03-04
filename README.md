@@ -1,8 +1,3 @@
-<div align="center" width="800">
-    <img alt="Wally Logo" src="wally-logo.svg" />
-    <h1>Wally, a package manager for Roblox</h1>
-</div>
-
 * [Installation](#installation)
 * [Commands](#commands)
 * [Prior Art](#prior-art)
@@ -12,28 +7,28 @@
 * [License](#license)
 
 ## About
-Wally is a package manager for Roblox inspired by Cargo (Rust) and npm (JavaScript). It brings the familiar, community-oriented world of sharing code from other communities into the Roblox ecosystem.
+octo is a package manager for Roblox inspired by Cargo (Rust) and npm (JavaScript). It brings the familiar, community-oriented world of sharing code from other communities into the Roblox ecosystem.
 
-Wally has two pieces that work together: a command line tool named `wally` and a registry server that hosts packages. Most users will only interact with the command line tool, but both are available in this repository.
+octo has two pieces that work together: a command line tool named `octo` and a registry server that hosts packages. Most users will only interact with the command line tool, but both are available in this repository.
 
 ## Installation
 
 ### From GitHub
-Pre-built binaries are available for Windows, macOS, and Linux from the [GitHub Releases Page for Wally][releases].
+Pre-built binaries are available for Windows, macOS, and Linux from the [GitHub Releases Page for octo][releases].
 
-[releases]: https://github.com/UpliftGames/wally/releases
+[releases]: https://github.com/UpliftGames/octo/releases
 
 ### With Foreman
-[Foreman][foreman] is a toolchain manager developed for the Roblox community. You can use it to install Wally:
+[Foreman][foreman] is a toolchain manager developed for the Roblox community. You can use it to install octo:
 
 ``` toml
-wally = { source = "UpliftGames/wally", version = "0.3.1" }
+octo = { source = "UpliftGames/octo", version = "0.3.1" }
 ```
 
 [foreman]: https://github.com/Roblox/foreman
 
 ### From Source
-It's straightforward to compile Wally from source. Wally requires Rust 1.51.0 or newer.
+It's straightforward to compile octo from source. octo requires Rust 1.51.0 or newer.
 
 Clone the repository and use:
 
@@ -43,14 +38,14 @@ cargo install --locked --path .
 
 ## Commands
 
-### `wally init`
+### `octo init`
 Create a new, empty package.
 
 Parity with:
 * `cargo init`
 * `npm init`
 
-### `wally install [--locked]`
+### `octo install [--locked]`
 Installs all packages.
 
 `--locked` matches `cargo XXX --locked`, which will error if there is not an up-to-date lockfile. Intended for use on CI machines.
@@ -59,51 +54,51 @@ Installs all packages.
 Parity with:
 * `npm install` with no arguments
 
-### `wally update [package-names]` (unimplemented)
+### `octo update [package-names]` (unimplemented)
 Update packages recursively. By default, will update all packages. If any package names are given (in the form `scope/name` or `scope/name@version-req`), just those packages will be updated instead.
 
 Parity with:
 * `cargo publish`
 * `npm update` (npm 7+, equivalent to `--depth 9999` in npm 6.x and older)
 
-### `wally publish`
+### `octo publish`
 Publish the current package.
 
 Parity with:
 * `cargo publish`
 * `npm publish`
 
-### `wally login`
+### `octo login`
 Log into an account to publish packages to a registry.
 
 Parity with:
 * `cargo login`
 * `npm login`
 
-### `wally logout`
+### `octo logout`
 Log out of a registry account.
 
 Parity with:
 * `cargo logout`
 * `npm logout`
 
-### `wally package [--list] --output <path>`
+### `octo package [--list] --output <path>`
 Package the current project as a zip file suitable for uploading to the package registry. Useful for adding entries to the registry and debugging what ends up in the blob that will be uploaded. `--list` will output which files will be included instead of creating a zip file.
 
 Parity with:
 * `cargo package`
 
-### `wally manifest-to-json`
+### `octo manifest-to-json`
 Prints the current project's manifest as a line of JSON. Used for adding entries to the package index.
 
 Parity with:
 * `cargo read-manifest`
 
-### `wally search <query>`
+### `octo search <query>`
 Search the registry to see what packages are available.
 
 ## Prior Art
-Wally aims to stand on the shoulders of giants. Decisions we make are in part backed up by looking at other package managers and other public documentation:
+octo aims to stand on the shoulders of giants. Decisions we make are in part backed up by looking at other package managers and other public documentation:
 
 * [*So you want to write a package manager*](https://medium.com/@sdboyer/so-you-want-to-write-a-package-manager-4ae9c17d9527)
 * [crates.io](https://crates.io/) and [Cargo](https://github.com/rust-lang/cargo) from the Rust ecosystem
@@ -111,7 +106,7 @@ Wally aims to stand on the shoulders of giants. Decisions we make are in part ba
 * [PyPI](https://pypi.org/), [pip](https://pip.pypa.io/en/stable/), [pipenv](https://pypi.org/project/pipenv/), and [Poetry](https://python-poetry.org/) from Python
 
 ## Manifest Format
-The package manifest file describes a package and all of the packages it depends on. Package manifests are written in [TOML][toml] and stored in a file named `wally.toml`.
+The package manifest file describes a package and all of the packages it depends on. Package manifests are written in [TOML][toml] and stored in a file named `octo.toml`.
 
 Manifest files are written by humans. They can contain comments and formatting decisions that are tough to preserve with automatic editing tools. This should be okay -- editing a package manifest should be easy.
 
@@ -146,14 +141,14 @@ authors = ["Lucien Greathouse <lucien@uplift.games>"]
 # The server realm should only be used for packages which shouldn't be replicated.
 realm = "shared"
 
-# Wally supports multiple registries.
+# octo supports multiple registries.
 # This feature can be used to have split public/private registries to
 # keep internal code private and isolated.
-registry = "https://github.com/upliftgames/wally-index"
+registry = "https://github.com/upliftgames/octo-index"
 
 # You can also specify files to include or exclude from the package
-# By default gitignore files are respected and Wally won't include hidden
-# files/directories or packages downloaded by Wally.
+# By default gitignore files are respected and octo won't include hidden
+# files/directories or packages downloaded by octo.
 # include = []
 exclude = ["node_modules"]
 
@@ -182,7 +177,7 @@ TestEZ = "roblox/testez@0.4.1"
 ## Lockfile Format
 The lockfile contains the exact versions of each dependency that a project depends on. They're a critical feature that ensures that everyone who works on a game is getting the exact same version of every package.
 
-Lockfiles are written in [TOML][toml] and stored in a file named `wally.lock`. They're human readable, but are only written by tools. We've optimized the lockfile format for reading as well as diffing so that they're as easy to review as possible.
+Lockfiles are written in [TOML][toml] and stored in a file named `octo.lock`. They're human readable, but are only written by tools. We've optimized the lockfile format for reading as well as diffing so that they're as easy to review as possible.
 
 ```toml
 [[package]]
@@ -212,13 +207,13 @@ commit = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
 ```
 
 ## Registries
-Like many programming language package managers, Wally packages are published to a registry.
+Like many programming language package managers, octo packages are published to a registry.
 
-A Wally registry consists of two pieces, inspired by Cargo and crates.io:
+A octo registry consists of two pieces, inspired by Cargo and crates.io:
 * A Git repository containing a package index
 * A registry API that handles downloading and publishing package contents
 
-The official Wally registry is available at https://github.com/upliftgames/wally-index.
+The official octo registry is available at https://github.com/upliftgames/octo-index.
 
 ### Registry API
 
@@ -235,4 +230,4 @@ The official Wally registry is available at https://github.com/upliftgames/wally
 [toml]: https://toml.io/
 
 ## License
-Wally is available under the terms of the Mozilla Public License Version 2.0. Terms and conditions are available in [LICENSE.txt](LICENSE.txt) or at <https://www.mozilla.org/en-US/MPL/2.0/>.
+octo is available under the terms of the Mozilla Public License Version 2.0. Terms and conditions are available in [LICENSE.txt](LICENSE.txt) or at <https://www.mozilla.org/en-US/MPL/2.0/>.
